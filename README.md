@@ -66,7 +66,7 @@ Chia sẻ bảng với các thành viên khác để làm việc nhóm.
 ### Các bảng chính và các cột
 
 1. **Bảng `Users`**
-   - `id`: PK, UUID hoặc Auto Increment
+   - `id`: PK, Auto Increment
    - `name`: Tên người dùng
    - `email`: Email người dùng (duy nhất)
    - `password_hash`: Mật khẩu mã hóa
@@ -74,9 +74,10 @@ Chia sẻ bảng với các thành viên khác để làm việc nhóm.
    - `created_at`: Ngày tạo tài khoản
 
 2. **Bảng `Boards`**
-   - `id`: PK, UUID hoặc Auto Increment
+   - `id`: PK, string
    - `name`: Tên bảng
    - `description`: Mô tả bảng
+   - `viewing_right`: Quyền xem của bảng( riêng tư, không gian làm việc, công khai
    - `created_by`: FK, tham chiếu tới `Users.id`
    - `created_at`: Ngày tạo bảng
    - `updated_at`: Ngày cập nhật cuối cùng
@@ -88,7 +89,7 @@ Chia sẻ bảng với các thành viên khác để làm việc nhóm.
    - `added_at`: Ngày thêm người dùng vào bảng
 
 4. **Bảng `Lists`**
-   - `id`: PK, UUID hoặc Auto Increment
+   - `id`: PK, string
    - `name`: Tên danh sách
    - `position`: Vị trí trong bảng để xác định thứ tự
    - `board_id`: FK, tham chiếu tới `Boards.id`
@@ -96,7 +97,7 @@ Chia sẻ bảng với các thành viên khác để làm việc nhóm.
    - `updated_at`: Ngày cập nhật cuối cùng
 
 5. **Bảng `Cards`**
-   - `id`: PK, UUID hoặc Auto Increment
+   - `id`: PK, string
    - `title`: Tiêu đề của thẻ
    - `description`: Mô tả chi tiết
    - `position`: Vị trí trong danh sách để sắp xếp
@@ -111,7 +112,7 @@ Chia sẻ bảng với các thành viên khác để làm việc nhóm.
    - `assigned_at`: Ngày gán thẻ cho người dùng
 
 7. **Bảng `Labels`**
-   - `id`: PK, UUID hoặc Auto Increment
+   - `id`: PK, string
    - `name`: Tên nhãn
    - `color`: Màu sắc nhãn
    - `board_id`: FK, tham chiếu tới `Boards.id`
@@ -121,26 +122,26 @@ Chia sẻ bảng với các thành viên khác để làm việc nhóm.
    - `label_id`: FK, tham chiếu tới `Labels.id`
 
 9. **Bảng `Checklists`**
-   - `id`: PK, UUID hoặc Auto Increment
+   - `id`: PK, Auto Increment
    - `name`: Tên checklist
    - `card_id`: FK, tham chiếu tới `Cards.id`
    - `created_at`: Ngày tạo checklist
 
 10. **Bảng `Checklist_Items`**
-    - `id`: PK, UUID hoặc Auto Increment
+    - `id`: PK, Auto Increment
     - `content`: Nội dung của mục checklist
     - `is_completed`: Trạng thái (hoàn thành hoặc chưa)
     - `checklist_id`: FK, tham chiếu tới `Checklists.id`
 
 11. **Bảng `Comments`** (Bình luận trên thẻ)
-    - `id`: PK, UUID hoặc Auto Increment
+    - `id`: PK, Auto Increment
     - `content`: Nội dung bình luận
     - `user_id`: FK, tham chiếu tới `Users.id`
     - `card_id`: FK, tham chiếu tới `Cards.id`
     - `created_at`: Ngày đăng bình luận
 
 12. **Bảng `Activity_Log`** (Lịch sử hoạt động)
-    - `id`: PK, UUID hoặc Auto Increment
+    - `id`: PK, Auto Increment
     - `description`: Mô tả hoạt động (ví dụ: "Người dùng X đã gán thẻ cho Y")
     - `user_id`: FK, tham chiếu tới `Users.id`
     - `board_id`: FK, tham chiếu tới `Boards.id`
@@ -148,21 +149,17 @@ Chia sẻ bảng với các thành viên khác để làm việc nhóm.
     - `created_at`: Ngày ghi nhận hoạt động
 
 13. **Bảng `Notifications`**
-    - `id`: PK, UUID hoặc Auto Increment
+    - `id`: PK, Auto Increment
     - `user_id`: FK, tham chiếu tới `Users.id` (người nhận thông báo)
     - `message`: Nội dung thông báo
     - `is_read`: Trạng thái đọc của thông báo
     - `created_at`: Ngày gửi thông báo
 
-### Mối quan hệ giữa các bảng chính
-
-- Mỗi `Board` có thể có nhiều `List`.
-- Mỗi `List` có thể có nhiều `Card`.
-- Mỗi `Card` có thể có nhiều `Checklist`.
-- Mỗi `Checklist` có thể có nhiều `Checklist_Item`.
-- `Users` và `Boards` có quan hệ nhiều-nhiều qua `Board_Users`.
-- `Users` và `Cards` có quan hệ nhiều-nhiều qua `Card_Assignees`.
-- `Cards` và `Labels` có quan hệ nhiều-nhiều qua `Card_Labels`.
-- `Comments` được liên kết với `Users` và `Cards` để lưu trữ các bình luận trong từng thẻ.
-- `Activity_Log` lưu lại hoạt động của người dùng trên các `Boards` và `Cards`.
+14. **Bảng `Files_Cart`**
+    - `id`: PK, string
+    - `file`: longblob
+    - `name`: tên file
+    - `uploaded_at`: thời gian tải file lên
+    - `card_id`: FK tham chiếu tới `cards.id`
+   
 
