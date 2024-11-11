@@ -2,6 +2,7 @@
 Website quản lý công việc việc theo nhóm
 
 <img src="https://user-images.githubusercontent.com/74038190/213760697-1dc03683-ba49-44f2-985e-95fd5ec22d3f.gif" width="400">
+
 ## Chức năng
 
 ### Quản lý bảng (Board Management)
