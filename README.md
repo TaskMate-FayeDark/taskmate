@@ -69,7 +69,7 @@ Chia sẻ bảng với các thành viên khác để làm việc nhóm.
    - `id`: PK, Auto Increment
    - `name`: Tên người dùng
    - `email`: Email người dùng (duy nhất)
-   - `password_hash`: Mật khẩu mã hóa
+   - `password`: Mật khẩu
    - `profile_picture`: Ảnh đại diện (URL)
    - `created_at`: Ngày tạo tài khoản
 
